@@ -31,7 +31,7 @@ For more information, please read the following resources:
 GETTING STARTED
 ============
 
-On the command line, run the following:
+On the command line, run the following from the project root directory:
 
 - bundle install
 - foreman start
