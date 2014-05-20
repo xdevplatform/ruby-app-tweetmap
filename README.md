@@ -13,7 +13,16 @@ To run this sample code, you'll need to install the following libraries:
 - Bundler
 - Redis
 
-Note that you need the latest XCode command line tools to compile the websockets dependency. 
+####Installing Redis
+You can install redis on Mac OSX using [homebrew](http://brew.sh/) simply with.
+
+`brew install redis`
+
+Platform independent instructions on installing redis can be found here.
+- http://redis.io/topics/quickstart
+
+####Dependency Notes
+You need the latest XCode command line tools to compile the websockets dependency. 
 You can do so with the following command:
 
   xcode-select --install
