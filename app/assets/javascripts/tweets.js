@@ -1,10 +1,12 @@
 var tweetList;
 
 var appendTweet = function(tweet){
-    removeOldestTweet();
-    var node = $('<li></li>');
-    node.html(tweet["text"]);
-    tweetList.append(node);
+    // removeOldestTweet();
+    // var node = $('<li></li>');
+    // node.html(tweet["text"]);
+    // tweetList.append(node);
+    $('#list').append("<li>" + tweet["text"] + "</li>");
+    
 };
 
 var removeOldestTweet = function(){
@@ -23,13 +25,13 @@ var map;
 
 var initGoogleMap = function() {
     mapOptions={
-        scrollwheel: false,
-        navigationControl: false,
-        mapTypeControl: false,
-        scaleControl: false,
-        draggable: false,center: new google.maps.LatLng(13.0021751,14.4060769),
-        zoom: 4
-
+        scrollwheel: true,
+        navigationControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        draggable: true,
+        center: new google.maps.LatLng(20.7127,-30.0059),
+        zoom: 3
     };
 
     map = new google.maps.Map(document.getElementById("map-canvas"),
@@ -79,9 +81,15 @@ $(document).ready(function(){
 
     channel.bind('stream', function(tweets) {
         $(tweets).each(function(i, tweet){
+/*
             console.log(tweet);
             appendTweet(tweet);
             appendToHeatMap(tweet);
+*/
+          setTimeout( function () {
+                appendTweet(tweet);
+                appendToHeatMap(tweet);
+           }, Math.random() * 2000);
         });
     });
 });

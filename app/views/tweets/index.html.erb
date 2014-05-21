@@ -1,8 +1,33 @@
-<div id="tweet" class="well">
-  <h2>These are the tweets you were looking for</h2>
-  <br/>
-  <br/>
-  <ol></ol>
+<style>
+#sidebar {
+  float: left;
+  width: 27.5%;
+  min-width: 275px;
+  height: 100%;
+  z-index: 0;
+}
+
+#sideBarLocation div {
+  display: inline;
+}
+
+#map-canvas
+{
+  width: 72.5%;
+  min-width: 725px;
+  height: 100%;
+  float: left;
+  z-index: 0;
+}
+</style>
+
+<div id="sidebar">
+  <div id="tweet" class="well">
+    <h2>Happening Now</h2>
+    <ol id="list"></ol>
+  </div>
 </div>
 
 <div id="map-canvas"/>
+
+

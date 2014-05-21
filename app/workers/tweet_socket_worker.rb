@@ -27,7 +27,7 @@ class TweetSocketWorker
 
   def broadcast_tweet(tweets)
     p tweets.size
-    p tweets
+#    p tweets
     WebsocketRails[:tweets].trigger('stream', tweets)
   end
 
