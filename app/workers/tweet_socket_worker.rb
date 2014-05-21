@@ -11,7 +11,6 @@ class TweetSocketWorker
         tweet_queue = []
       end
     end
-    p "Streaming"
     stream
   end
 
@@ -26,8 +25,6 @@ class TweetSocketWorker
   end
 
   def broadcast_tweet(tweets)
-    p tweets.size
-#    p tweets
     WebsocketRails[:tweets].trigger('stream', tweets)
   end
 

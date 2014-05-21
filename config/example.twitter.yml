@@ -1,0 +1,15 @@
+development:
+  #API key/secret
+  consumer_key: CHANGE_ME
+  consumer_secert: CHANGE_ME
+  #Access token/secret
+  access_token: CHANGE_ME
+  access_token_secret: CHANGE_ME
+
+production:
+  #API key/secret
+  consumer_key: CHANGE_ME
+  consumer_secert: CHANGE_ME
+  #Access token/secret
+  access_token: CHANGE_ME
+  access_token_secret: CHANGE_ME
