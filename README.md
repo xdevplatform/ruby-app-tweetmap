@@ -13,15 +13,16 @@ To run this sample code, you'll need to install the following libraries:
 - Bundler
 - Redis
 
-####Installing Redis
-You can install redis on Mac OSX using [homebrew](http://brew.sh/) simply with.
+#### Installing Redis
+
+You can install redis on Mac OSX using [homebrew](http://brew.sh/) simply with:
 
 	brew install redis
 
-Platform independent instructions on installing redis can be found here.
-- http://redis.io/topics/quickstart
+Platform independent instructions on installing redis can be found here: [http://redis.io/topics/quickstart](http://redis.io/topics/quickstart)
 
-####Dependency Notes
+#### Dependency Notes
+
 You need the latest XCode command line tools to compile the websockets dependency. 
 You can do so with the following command:
 
@@ -40,11 +41,20 @@ For more information, please read the following resources:
 GETTING STARTED
 ============
 
-On the command line, run the following from the project root directory:
+To configure and run this example, you'll need to do the following:
 
-- `bundle install`
-- `foreman start`
-- open [http://localhost:3000/tweets](http://localhost:3000/tweets)
+- Supply your Twitter access tokens in the `config/twitter.yml` file:
+
+		consumer_key: CHANGE_ME	    
+		consumer_secret: CHANGE_ME  	
+		access_token: CHANGE_ME  	
+		access_token_secret: CHANGE_ME    
+
+- Run `bundle install`
+
+- Run `foreman start`
+
+- Open [http://localhost:3000/tweets](http://localhost:3000/tweets)
 
 
 
