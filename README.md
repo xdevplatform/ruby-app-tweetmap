@@ -16,7 +16,7 @@ To run this sample code, you'll need to install the following libraries:
 ####Installing Redis
 You can install redis on Mac OSX using [homebrew](http://brew.sh/) simply with.
 
-`brew install redis`
+	brew install redis
 
 Platform independent instructions on installing redis can be found here.
 - http://redis.io/topics/quickstart
@@ -25,16 +25,16 @@ Platform independent instructions on installing redis can be found here.
 You need the latest XCode command line tools to compile the websockets dependency. 
 You can do so with the following command:
 
-  xcode-select --install
+	xcode-select --install
   
 Also, if you need to link to gcc on your computer, you can do the following:
 
-  ln -s /usr/bin/gcc /usr/bin/gcc-4.2
+	ln -s /usr/bin/gcc /usr/bin/gcc-4.2
   
 For more information, please read the following resources: 
 
-- https://github.com/faye/websocket-driver-ruby/issues/11
-- http://stackoverflow.com/questions/12256616/os-x-mountain-lion-gcc-4-2-no-such-file-or-directory
+- [Github: cannot install on osx 10.9](https://github.com/faye/websocket-driver-ruby/issues/11)
+- [stackoverflow: OS X Mountain Lion: gcc-4.2 No such file or directory](http://stackoverflow.com/questions/12256616/os-x-mountain-lion-gcc-4-2-no-such-file-or-directory)
 
 
 GETTING STARTED
@@ -42,9 +42,9 @@ GETTING STARTED
 
 On the command line, run the following from the project root directory:
 
-- bundle install
-- foreman start
-- open http://localhost:3000/tweets
+- `bundle install`
+- `foreman start`
+- open [http://localhost:3000/tweets](http://localhost:3000/tweets)
 
 
 
