@@ -1,11 +1,17 @@
 var tweetList;
 
+var count = 0;
+
 var appendTweet = function(tweet){
     // removeOldestTweet();
     // var node = $('<li></li>');
     // node.html(tweet["text"]);
     // tweetList.append(node);
-    $('#list').append("<li>" + tweet["text"] + "</li>");
+    
+    count = count + 1;
+    
+    var list = $('#list');
+    list.prepend("<li>" + tweet["text"] + "</li>");
     
 };
 
@@ -89,7 +95,7 @@ $(document).ready(function(){
           setTimeout( function () {
                 appendTweet(tweet);
                 appendToHeatMap(tweet);
-           }, Math.random() * 2000);
+           }, Math.random() * 1000);
         });
     });
 });
