@@ -3,26 +3,11 @@ var tweetList;
 var count = 0;
 
 var appendTweet = function(tweet){
-    // removeOldestTweet();
-    // var node = $('<li></li>');
-    // node.html(tweet["text"]);
-    // tweetList.append(node);
-    
     count = count + 1;
-    
     var list = $('#list');
     list.prepend("<li>" + tweet["text"] + "</li>");
-    
-};
-
-var removeOldestTweet = function(){
-    if(!tweetList){
-        tweetList = $('ol');
-    }
-    try {
-        tweetList.find('li')[0].remove();
-    } catch (e){
-
+    if (count > 30){
+      $('#list li:last-child').remove();
     }
 };
 
@@ -87,14 +72,9 @@ $(document).ready(function(){
 
     channel.bind('stream', function(tweets) {
         $(tweets).each(function(i, tweet){
-/*
-            console.log(tweet);
-            appendTweet(tweet);
-            appendToHeatMap(tweet);
-*/
           setTimeout( function () {
-                appendTweet(tweet);
-                appendToHeatMap(tweet);
+              appendTweet(tweet);
+              appendToHeatMap(tweet);
            }, Math.random() * 1000);
         });
     });
