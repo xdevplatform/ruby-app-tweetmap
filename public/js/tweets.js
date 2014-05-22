@@ -71,7 +71,7 @@ function pushHeatMarkers(lat_lon_array, tweet) {
             content: contentString
         });
 
-        var lat_lon = new google.maps.LatLng(marker[0], marker[1]);
+        var lat_lon = new google.maps.LatLng(marker[1], marker[0]);
         var marker = new google.maps.Marker({
             position: lat_lon,
             map: map,
