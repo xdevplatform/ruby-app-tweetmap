@@ -27,6 +27,7 @@ var initGoogleMap = function() {
 
     map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
+        
 }
 
 function loadGoogleMapScript() {
@@ -41,26 +42,47 @@ function loadGoogleMapScript() {
 var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png'; 
 
-var pushHeatMarkers = function(lat_lon_array, text) {
+var pushHeatMarker = function(lat_lon_array, tweet) {
     var markers =[];
 
     $(lat_lon_array).each(function(i, marker){
         var lat_lon =  new google.maps.LatLng(marker[0],marker[1]);
 
-        new google.maps.Marker({
+      var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">'+
+          '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' + 
+          tweet["user"]["profile_image_url"] +
+          '">' + 
+          '<div style="float: left; max-width: 300px;">' + 
+          '<b>' + tweet["user"]["name"] + '</b>' +
+          ' <span style="color: #8899a6">@' + tweet["user"]["screen_name"] + '</span><br>' +
+          tweet["text"] +
+          '</div>' +
+          '</div>';
+          
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        var marker = new google.maps.Marker({
             position: lat_lon,
             map: map,
-            title: text,
+            title: tweet["text"],
             icon: iconTweet,
             animation: google.maps.Animation.DROP
         });
+        
+        google.maps.event.addListener(marker, 'click', function() {
+          $(".tweetMarker").parent().parent().parent().fadeOut();
+          infowindow.open(map, marker);
+        });
+
     });
 };
 
-var appendToHeatMap = function (tweets) {
+var appendToHeatMap = function (tweet) {
     var geo;
-    geo = tweets["geo"]["coordinates"];
-    pushHeatMarkers([geo], tweets["text"]);
+    geo = tweet["geo"]["coordinates"];
+    pushHeatMarker([geo], tweet);
 }
 
 window.onload = loadGoogleMapScript;
