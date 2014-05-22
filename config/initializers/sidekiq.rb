@@ -1,1 +1,0 @@
-TweetSocketWorker.perform_async
