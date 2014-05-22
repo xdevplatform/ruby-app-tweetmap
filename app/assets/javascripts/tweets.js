@@ -38,10 +38,11 @@ function loadGoogleMapScript() {
 };
 
 
+var iconBase = '/assets/';
+var iconTweet = iconBase + 'tweet__.png'; 
 
 var pushHeatMarkers = function(lat_lon_array, text) {
     var markers =[];
-
 
     $(lat_lon_array).each(function(i, marker){
         var lat_lon =  new google.maps.LatLng(marker[0],marker[1]);
@@ -50,6 +51,7 @@ var pushHeatMarkers = function(lat_lon_array, text) {
             position: lat_lon,
             map: map,
             title: text,
+            icon: iconTweet,
             animation: google.maps.Animation.DROP
         });
     });
