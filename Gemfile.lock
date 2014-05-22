@@ -58,5 +58,5 @@ DEPENDENCIES
   hashie
   sinatra
   sinatra-websocket
-  thin (~> 1.5.1)
+  thin (= 1.5.1)
   twitter
