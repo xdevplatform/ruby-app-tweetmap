@@ -49,7 +49,7 @@ function pushHeatMarkers(lat_lon_array, tweet) {
         var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
         var statusUrl = profileUrl + "/status/" + tweet["id_str"];
 
-        var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">' +
+        var contentString = '<div id="tweet">' +
             '<a href="' + profileUrl + '" target="_target">' +
             '<img class="profile" src="' +
             tweet["user"]["profile_image_url"] +

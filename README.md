@@ -31,11 +31,13 @@ To configure and run this example, you'll need to do the following:
 
 - `cd <project_root>`
 
+- `brew link autoconf` (bundle install will tell you to do this if you have not already)
+
 - `bundle install`
 
 - `ruby app.rb <ENV> #ENV defaults to development`
 
-- Open [http://localhost:8181/tweets](http://localhost:8181/tweets)
+- Open [http://localhost:8181/map](http://localhost:8181/map)
 
 
 
