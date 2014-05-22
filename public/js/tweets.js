@@ -103,11 +103,18 @@ var tweetURI = "/tweets.json";
 
 $(document).ready(function () {
     $(document).ready(function () {
-        setInterval(function () {
+        var retries = 0;
+        var id = setInterval(function () {
             $.getJSON((serverHost + tweetURI), function (data) {
                 appendTweet(data);
                 appendToHeatMap(data);
+                retries = 0;
+            }).fail(function (jqXHR, status, error) {
+                retries += 1;
+                if (retries > 15) {
+                    clearInterval(id);
+                }
             });
-        }, 200);
+        }, 250);
     });
 });
