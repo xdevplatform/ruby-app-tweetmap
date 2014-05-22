@@ -47,10 +47,10 @@ class TweetSocketWorker
 
   def tw_client
     Twitter::Streaming::Client.new do |config|
-      config.consumer_key = "anmMaSX0JxdpsPVgVh4ILUL2Q" #$TWITTER_CONFIG[:consumer_key]
-      config.consumer_secret = "YqCUzKYMfAPALs9LvnbkqyZD8uz7vSMfujpJbX8RiN6Yth8wJv" #$TWITTER_CONFIG[:consumer_secret]
-      config.access_token = "99428558-DeQx0ViftBnzWDBfcxcO84RwpkRVytjVGHY4CZJQZ" #$TWITTER_CONFIG[:access_token]
-      config.access_token_secret = "LYgSOdXONheOaGXkDezSPHeg5GKYcyMv3YlDfZiTT49i7" #$TWITTER_CONFIG[:access_token_secret]
+      config.consumer_key = $TWITTER_CONFIG["consumer_key"]
+      config.consumer_secret = $TWITTER_CONFIG["consumer_secret"]
+      config.access_token = $TWITTER_CONFIG["access_token"]
+      config.access_token_secret = $TWITTER_CONFIG["access_token_secret"]
     end
   end
 

@@ -2,6 +2,7 @@ require 'eventmachine'
 require 'em-websocket'
 require 'sinatra/base'
 require 'thin'
+require './config/twitter.rb'
 require './lib/tweet_socket_worker'
 
 def run(opts)

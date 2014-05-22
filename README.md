@@ -33,7 +33,7 @@ To configure and run this example, you'll need to do the following:
 
 - `bundle install`
 
-- `ruby app.rb`
+- `ruby app.rb <ENV> #ENV defaults to development`
 
 - Open [http://localhost:8181/tweets](http://localhost:8181/tweets)
 
