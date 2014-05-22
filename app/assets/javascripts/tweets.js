@@ -50,19 +50,19 @@ var pushHeatMarker = function(lat_lon_array, tweet) {
         var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
         var statusUrl = profileUrl + "/status/" + tweet["id_str"];
 
-        var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">'+
+        var contentString = '<div id="tweet" class="tweet" style="max-width: 400px;">'+
             '<a href="' + profileUrl + '" target="_target">' + 
-            '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' + 
+            '<img class="profile" src="' + 
             tweet["user"]["profile_image_url"] +
             '">' +
             '</a>' + 
-            '<div style="float: left; max-width: 300px;">' +
+            '<div class="body">' +
             '<a href="' + profileUrl + '" target="_target">' + 
-            '<b>' + tweet["user"]["name"] + '</b>' +
-            ' <span style="color: #8899a6">@' + tweet["user"]["screen_name"] + '</span>' +
+            '<span class="name">' + tweet["user"]["name"] + '</span>' +
+            ' <span class="handle">@' + tweet["user"]["screen_name"] + '</span>' +
             '</a>' + 
             '<br>' + 
-            '<a href="' + statusUrl + '" target="_target">' + 
+            '<a href="' + statusUrl + '" target="_target" class="text">' + 
             tweet["text"] +
             '</a>' + 
             '</div>' +
@@ -82,7 +82,7 @@ var pushHeatMarker = function(lat_lon_array, tweet) {
         });
         
         google.maps.event.addListener(marker, 'click', function() {
-          $(".tweetMarker").parent().parent().parent().fadeOut();
+          $(".tweet").parent().parent().parent().fadeOut();
           infowindow.open(map, marker);
         });
 
