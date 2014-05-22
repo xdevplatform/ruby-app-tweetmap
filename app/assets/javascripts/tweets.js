@@ -46,23 +46,33 @@ var pushHeatMarker = function(lat_lon_array, tweet) {
     var markers =[];
 
     $(lat_lon_array).each(function(i, marker){
-        var lat_lon =  new google.maps.LatLng(marker[0],marker[1]);
 
-      var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">'+
-          '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' + 
-          tweet["user"]["profile_image_url"] +
-          '">' + 
-          '<div style="float: left; max-width: 300px;">' + 
-          '<b>' + tweet["user"]["name"] + '</b>' +
-          ' <span style="color: #8899a6">@' + tweet["user"]["screen_name"] + '</span><br>' +
-          tweet["text"] +
-          '</div>' +
-          '</div>';
+        var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
+        var statusUrl = profileUrl + "/status/" + tweet["id_str"];
+
+        var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">'+
+            '<a href="' + profileUrl + '" target="_target">' + 
+            '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' + 
+            tweet["user"]["profile_image_url"] +
+            '">' +
+            '</a>' + 
+            '<div style="float: left; max-width: 300px;">' +
+            '<a href="' + profileUrl + '" target="_target">' + 
+            '<b>' + tweet["user"]["name"] + '</b>' +
+            ' <span style="color: #8899a6">@' + tweet["user"]["screen_name"] + '</span>' +
+            '</a>' + 
+            '<br>' + 
+            '<a href="' + statusUrl + '" target="_target">' + 
+            tweet["text"] +
+            '</a>' + 
+            '</div>' +
+            '</div>';
           
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
 
+        var lat_lon =  new google.maps.LatLng(marker[0],marker[1]);
         var marker = new google.maps.Marker({
             position: lat_lon,
             map: map,
