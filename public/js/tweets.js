@@ -49,7 +49,7 @@ function pushHeatMarkers(lat_lon_array, tweet) {
         var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
         var statusUrl = profileUrl + "/status/" + tweet["id_str"];
 
-        var contentString = '<div id="tweet">' +
+        var contentString = '<div id="tweet" class="tweet">' +
             '<a href="' + profileUrl + '" target="_target">' +
             '<img class="profile" src="' +
             tweet["user"]["profile_image_url"] +
@@ -81,7 +81,7 @@ function pushHeatMarkers(lat_lon_array, tweet) {
         });
 
         google.maps.event.addListener(marker, 'click', function () {
-            $(".tweetMarker").parent().parent().parent().fadeOut();
+            $(".tweet").parent().parent().parent().fadeOut();
             infowindow.open(map, marker);
         });
 
