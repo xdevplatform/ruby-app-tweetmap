@@ -40,9 +40,9 @@ function loadGoogleMapScript() {
 
 
 var iconBase = '/assets/';
-var iconTweet = iconBase + 'tweet__.png'; 
+var iconTweet = iconBase + 'tweet__.png';
 
-var pushHeatMarker = function(lat_lon_array, tweet) {
+function pushHeatMarkers(lat_lon_array, tweet) {
     var markers =[];
 
     $(lat_lon_array).each(function(i, marker){
@@ -51,23 +51,23 @@ var pushHeatMarker = function(lat_lon_array, tweet) {
         var statusUrl = profileUrl + "/status/" + tweet["id_str"];
 
         var contentString = '<div id="content" class="tweetMarker" style="max-width: 400px;">'+
-            '<a href="' + profileUrl + '" target="_target">' + 
-            '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' + 
+            '<a href="' + profileUrl + '" target="_target">' +
+            '<img style="float: left; border-radius: 4px; margin-right: 6px; width: 60px;" src="' +
             tweet["user"]["profile_image_url"] +
             '">' +
-            '</a>' + 
+            '</a>' +
             '<div style="float: left; max-width: 300px;">' +
-            '<a href="' + profileUrl + '" target="_target">' + 
+            '<a href="' + profileUrl + '" target="_target">' +
             '<b>' + tweet["user"]["name"] + '</b>' +
             ' <span style="color: #8899a6">@' + tweet["user"]["screen_name"] + '</span>' +
-            '</a>' + 
-            '<br>' + 
-            '<a href="' + statusUrl + '" target="_target">' + 
+            '</a>' +
+            '<br>' +
+            '<a href="' + statusUrl + '" target="_target">' +
             tweet["text"] +
-            '</a>' + 
+            '</a>' +
             '</div>' +
             '</div>';
-          
+
         var infowindow = new google.maps.InfoWindow({
             content: contentString
         });
@@ -80,36 +80,32 @@ var pushHeatMarker = function(lat_lon_array, tweet) {
             icon: iconTweet,
             animation: google.maps.Animation.DROP
         });
-        
+
         google.maps.event.addListener(marker, 'click', function() {
-          $(".tweetMarker").parent().parent().parent().fadeOut();
-          infowindow.open(map, marker);
+            $(".tweetMarker").parent().parent().parent().fadeOut();
+            infowindow.open(map, marker);
         });
 
     });
-};
-
+}
 var appendToHeatMap = function (tweet) {
     var geo;
-    geo = tweet["geo"]["coordinates"];
-    pushHeatMarker([geo], tweet);
+    geo = tweet.coordinates;
+    if(geo) {
+        pushHeatMarkers([geo.coordinates], tweet);
+    }
 }
 
 window.onload = loadGoogleMapScript;
 //-------------------------------------------
 
 $(document).ready(function(){
-
-    var dispatcher = new WebSocketRails('localhost:3000/websocket');
-    var channel = dispatcher.subscribe('tweets');
-    console.log(channel);
-
-    channel.bind('stream', function(tweets) {
-        $(tweets).each(function(i, tweet){
-          setTimeout( function () {
-              appendTweet(tweet);
-              appendToHeatMap(tweet);
-           }, Math.random() * 1000);
-        });
+    $(document).ready(function () {
+        setInterval(function () {
+            $.getJSON("http://localhost:8181/tweets.json", function (data) {
+                appendTweet(data);
+                appendToHeatMap(data);
+            });
+        }, 200);
     });
 });
