@@ -1,4 +1,5 @@
 var count = 0;
+var sampleRate = 10; // only show 1/n of the total feed
 var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png';
 
@@ -7,6 +8,14 @@ var ws = new WebSocket('ws://localhost:8080/');
 
 ws.onmessage = function (message) {
     var tweet = JSON.parse(message.data);
+    
+    count = count + 1;
+    $("#count").html(count);
+    
+    if (count % sampleRate != 0){
+      return;
+    }
+    
     appendTweet(tweet);
     placeMarker(tweet);
 };
@@ -59,7 +68,7 @@ function geolocationSuccess(position) {
     var centerPosition = new google.maps.LatLng(latitude, longitude);
 
     map.setCenter(centerPosition);
-    map.setZoom(7);
+    // map.setZoom(7);
 }
 
 function adjustStreamForMap() {
@@ -97,10 +106,9 @@ function geolocationError() {
 //----------- Map Logic ----------
 
 var appendTweet = function (tweet) {
-    count = count + 1;
     var list = $('#list');
     list.prepend("<li>" + tweet["text"] + "</li>");
-    if (count > 30) {
+    if ($("#list li").size() > 30) {
         $('#list li:last-child').remove();
     }
 };

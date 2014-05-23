@@ -35,7 +35,7 @@ To configure and run this example, you'll need to do the following:
 
 - `bundle install`
 
-- `bundle exec ruby app.rb <ENV> #ENV defaults to development`
+- `bundle exec ruby app.rb <ENV>` #ENV defaults to development`
 
 - Open [http://localhost:8181/map](http://localhost:8181/map)
 
