@@ -1,5 +1,5 @@
 var count = 0;
-var sampleRate = 10; // only show 1/n of the total feed
+var sampleRate = 2; // only show 1/n of the total feed
 var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png';
 var useBrowserGeo = false;
