@@ -1,3 +1,4 @@
+*.lock
 .idea
 *.iml
 dump.rdb
@@ -7,4 +8,3 @@ dump.rdb
 /log/*.log
 /tmp
 config/twitter.yml
-config/twitter_my.yml
