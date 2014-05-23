@@ -2,6 +2,7 @@ var count = 0;
 var sampleRate = 10; // only show 1/n of the total feed
 var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png';
+var useBrowserGeo = false;
 
 //-------- WebSocket -------------
 var ws = new WebSocket('ws://localhost:8080/');
@@ -35,24 +36,17 @@ function initializeMap() {
         mapTypeControl: true,
         scaleControl: true,
         draggable: true,
-        zoom: 3
+        zoom: 4
     };
 
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     // Request the user geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(geolocationSuccess, geolocationError);
+    if (navigator.geolocation && useBrowserGeo) {
+        navigator.geolocation.getCurrentPosition(geolocationSuccess, manuallyCenterMap);
     } else {
-        geolocationError();
+        manuallyCenterMap();
     }
-
-    // Bias the SearchBox results towards places that are within the bounds of the
-    // current map's viewport.
-    google.maps.event.addListener(map, 'idle', function () {
-        var bounds = map.getBounds();
-        adjustStreamForMap()
-    });
 }
 
 // Listen to the load event.
@@ -71,36 +65,10 @@ function geolocationSuccess(position) {
     // map.setZoom(7);
 }
 
-function adjustStreamForMap() {
-    // Bounds of the map.
-    var bounds = map.getBounds();
-
-    if (bounds) {
-        // String representing the bounding box (SW coordinates, NE coordinates).
-        var locations = bounds.getSouthWest().lng() + ',' +
-            bounds.getSouthWest().lat() + ',' +
-            bounds.getNorthEast().lng() + ',' +
-            bounds.getNorthEast().lat();
-
-        // Emit the `stream` event with the locations on the socket.
-        console.log(locations);
-
-        if (ws.readyState) {
-            ws.send(locations);
-        }
-    }
-}
-
 // Callback function when the geolocation is not supported.
-function geolocationError() {
-    var options = {
-        map: map,
-        center: new google.maps.LatLng(20.7127, -30.0059),
-        content: 'Oops, location not found.'
-    };
-
-    var errorNotice = new google.maps.InfoWindow(options);
-    map.setCenter(options.position);
+function manuallyCenterMap() {
+    map.setCenter(new google.maps.LatLng(36.8547444,-92.823214));
+    map.setZoom(4);
 }
 
 //----------- Map Logic ----------
