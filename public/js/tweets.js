@@ -57,10 +57,9 @@ function pushHeatMarkers(lat_lon_array, tweet) {
             '</a>' +
             '<div class="body">' +
             '<a href="' + profileUrl + '" target="_target">' +
-            '<span class="name">' + tweet["user"]["name"] + '</span>' +
-            ' <span class="handle">@' + tweet["user"]["screen_name"] + '</span>' +
+            '<div><span class="name">' + tweet["user"]["name"] + '</span>' +
+            ' <span class="handle">@' + tweet["user"]["screen_name"] + '</span></div>' +
             '</a>' +
-            '<br>' +
             '<a href="' + statusUrl + '" target="_target" class="text">' +
             tweet["text"] +
             '</a>' +

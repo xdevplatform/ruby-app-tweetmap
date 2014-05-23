@@ -30,7 +30,7 @@ a:hover {
 }
 
 #tweet {
-    max-width: 400px;
+    max-width: 500px;
 }
 
 #tweet .profile {
@@ -42,7 +42,7 @@ a:hover {
 
 #tweet .body {
     float: left;
-    max-width: 300px;
+    max-width: 400px;
 }
 
 #tweet .name {
