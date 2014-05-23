@@ -7,4 +7,4 @@ dump.rdb
 /db/*.sqlite3-journal
 /log/*.log
 /tmp
-config/twitter.yml
+/config/twitter.yml

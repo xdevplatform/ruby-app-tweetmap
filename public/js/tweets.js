@@ -1,17 +1,17 @@
-var tweetList;
-
 var count = 0;
+var iconBase = '/assets/';
+var iconTweet = iconBase + 'tweet__.png';
 
-var appendTweet = function (tweet) {
-    count = count + 1;
-    var list = $('#list');
-    list.prepend("<li>" + tweet["text"] + "</li>");
-    if (count > 30) {
-        $('#list li:last-child').remove();
-    }
+//-------- WebSocket -------------
+var ws = new WebSocket('ws://localhost:8080/');
+
+ws.onmessage = function (message) {
+    var tweet = JSON.parse(message.data);
+    appendTweet(tweet);
+    placeMarker(tweet);
 };
 
-// -------------- Maps -------------------------
+// ------- Google Maps Setup -----
 var map;
 
 var initGoogleMap = function () {
@@ -28,6 +28,34 @@ var initGoogleMap = function () {
     map = new google.maps.Map(document.getElementById("map-canvas"),
         mapOptions);
 
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            var pos = new google.maps.LatLng(position.coords.latitude,
+                position.coords.longitude);
+
+            map.setCenter(pos);
+            map.setZoom(7);
+
+        }, function () {
+            handleNoGeolocation(true);
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        geolocationError();
+    }
+}
+
+// Callback function when the geolocation is not supported.
+function geolocationError() {
+    var options = {
+        map: map,
+        center: new google.maps.LatLng(20.7127, -30.0059),
+        zoom: 3,
+        content: 'Oops, location not found.'
+    };
+
+    var errorNotice = new google.maps.InfoWindow(options);
+    map.setCenter(options.center);
 }
 
 function loadGoogleMapScript() {
@@ -38,13 +66,24 @@ function loadGoogleMapScript() {
     document.body.appendChild(script);
 };
 
-var iconBase = '/assets/';
-var iconTweet = iconBase + 'tweet__.png';
+window.onload = loadGoogleMapScript;
 
-function pushHeatMarkers(lat_lon_array, tweet) {
-    var markers = [];
+//----------- Map Logic ----------
 
-    $(lat_lon_array).each(function (i, marker) {
+var appendTweet = function (tweet) {
+    count = count + 1;
+    var list = $('#list');
+    list.prepend("<li>" + tweet["text"] + "</li>");
+    if (count > 30) {
+        $('#list li:last-child').remove();
+    }
+};
+
+function placeMarker(tweet) {
+    var geo = tweet.coordinates;
+
+    // Check if the geo type is a Point (it can also be a Polygon).
+    if (geo && geo.type === 'Point') {
 
         var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
         var statusUrl = profileUrl + "/status/" + tweet["id_str"];
@@ -70,7 +109,7 @@ function pushHeatMarkers(lat_lon_array, tweet) {
             content: contentString
         });
 
-        var lat_lon = new google.maps.LatLng(marker[1], marker[0]);
+        var lat_lon = new google.maps.LatLng(geo.coordinates[1], geo.coordinates[0]);
         var marker = new google.maps.Marker({
             position: lat_lon,
             map: map,
@@ -83,37 +122,5 @@ function pushHeatMarkers(lat_lon_array, tweet) {
             $(".tweet").parent().parent().parent().fadeOut();
             infowindow.open(map, marker);
         });
-
-    });
-};
-
-var appendToHeatMap = function (tweet) {
-    var geo;
-    geo = tweet.coordinates;
-    if (geo) {
-        pushHeatMarkers([geo.coordinates], tweet);
     }
-}
-
-window.onload = loadGoogleMapScript;
-//-------------------------------------------
-var serverHost = "http://localhost:8181";
-var tweetURI = "/tweets.json";
-
-$(document).ready(function () {
-    $(document).ready(function () {
-        var retries = 0;
-        var id = setInterval(function () {
-            $.getJSON((serverHost + tweetURI), function (data) {
-                appendTweet(data);
-                appendToHeatMap(data);
-                retries = 0;
-            }).fail(function (jqXHR, status, error) {
-                retries += 1;
-                if (retries > 15) {
-                    clearInterval(id);
-                }
-            });
-        }, 250);
-    });
-});
+};
