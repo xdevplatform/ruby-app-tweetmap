@@ -21,11 +21,16 @@ class TwitterStream
     @callbacks << block
   end
 
+  def filter bounds
+    @filter_bounds = bounds
+  end
+
   def stream
     Thread.new do
       retry_count = 0
       begin
-        tw_client.filter(locations: "-180,-90,180,90") do |object|
+        @filter_bounds = "-180,-90,180,90"
+        tw_client.filter(locations: @filter_bounds) do |object|
           if object.is_a?(Twitter::Tweet)
             @callbacks.each { |c| c.call(object.to_h) }
             retry_count = 0
