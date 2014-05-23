@@ -34,6 +34,7 @@ class TwitterStream
           if object.is_a?(Twitter::Tweet)
             @callbacks.each { |c| c.call(object.to_h) }
             retry_count = 0
+
           end
         end
       rescue => e
