@@ -1,7 +1,7 @@
 sample-ruby-app
 =================
 
-Sample Rails App to consume and display the Twitter public API. Uses Websockets to push to the client.
+Sample Ruby App to consume and display the Twitter public API. Uses Websockets to push to the client.
 
 REQUIREMENTS
 ============
