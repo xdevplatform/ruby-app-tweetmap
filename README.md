@@ -1,4 +1,4 @@
-sample-rails-app
+sample-ruby-app
 =================
 
 Sample Rails App to consume and display the Twitter public API. Uses Websockets to push to the client.
