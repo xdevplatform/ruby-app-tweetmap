@@ -4,7 +4,7 @@ require 'em-websocket'
 require 'sinatra/base'
 
 require_relative 'config/twitter.rb'
-require_relative 'lib/twitterstream'
+require_relative 'lib/twitterstream.rb'
 
 def run(opts)
 
