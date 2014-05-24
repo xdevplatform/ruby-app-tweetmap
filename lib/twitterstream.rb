@@ -40,7 +40,7 @@ class TwitterStream
       rescue => e
         retry_count += 1
         puts "Error connecting to stream: #{e.message}"
-        retry_delay = retry_count * 1/2
+        retry_delay = retry_count * 5
         puts "Reconnecting in #{retry_delay} seconds\n"
         sleep retry_delay
         retry
