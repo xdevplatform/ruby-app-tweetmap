@@ -26,6 +26,7 @@ class TwitterStream
   end
 
   def stream
+    puts "Making connection to streaming Twitter API..."
     Thread.new do
       retry_count = 0
       begin
@@ -37,11 +38,11 @@ class TwitterStream
           end
         end
       rescue => e
-        retry unless e.message.downcase.include? 'Turbo'
         retry_count += 1
-        puts "Rescue in main block: #{e.message}"
-        puts "\n\nReconnecting in #{retry_count * 10} seconds\n\n"
-        sleep 2
+        puts "Error connecting to stream: #{e.class}"
+        retry_delay = retry_count * 5
+        puts "Reconnecting in #{retry_delay} seconds\n"
+        sleep retry_delay
         retry
       end
     end
