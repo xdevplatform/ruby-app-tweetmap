@@ -85,7 +85,6 @@ function handleTweet(message) {
 
             // Increment counter
             count = count + 1;
-            $("#count").html(count);
 
             // Append to list
             var list = $('#list');
@@ -96,6 +95,13 @@ function handleTweet(message) {
         }
     }
 }
+
+// Calculate a TPM every 4s
+setInterval(function () {
+    var tpm = count * 15;
+    $("#tpm").html(tpm);
+    count = 0;
+}, 4000);
 
 // Callback function when the geolocation is retrieved.
 function geolocationSuccess(position) {

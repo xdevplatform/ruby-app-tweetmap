@@ -5,21 +5,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
   <meta name="author" content="Andrew Noonan">
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" media="screen"/>
   <link rel="shortcut icon" href="//abs.twimg.com/favicons/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Twitter</a>
+      <h1 class="navbar-text">Twitter Streaming API Map Demo</h1>
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="https://twitter.com/TwitterDev" class="twitter-follow-button" data-size="large" data-show-count="false">Follow @TwitterDev</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
 <div id="sidebar">
   <div id="tweets">
-    <h3>Happening Now (<span id="count">0 </span> Tweets)</h3>
+    <h3>Happening Now (<span id="tpm">0 </span> TPM)</h3>
     <ul id="list"></ul>
   </div>
 </div>
 <div id="map-canvas"/>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 <script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+<script async src="//platform.twitter.com/widgets.js"></script>
 <script type="text/javascript" src="/js/tweets.js"></script>
 </body>
 </html>

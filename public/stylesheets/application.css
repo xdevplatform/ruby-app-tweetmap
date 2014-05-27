@@ -2,6 +2,48 @@ html { height: 100% }
 body { height: 100%; margin: 0; padding: 0 }
 #map-canvas { height: 100% }
 
+body {
+    padding-top: 50px;
+}
+
+.navbar {
+    height: 50px;
+}
+
+.navbar-default {
+    background-color: #55acee;
+    border: none;
+}
+
+.navbar-default .navbar-brand {
+    width: 25px;
+    height: 50px;
+    background: url(../assets/twitter-logo.png) center center no-repeat;
+    background-size: 25px 20px;
+    text-indent: -9999px;
+}
+
+.navbar-default .navbar-text {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: 300;
+    color: #fff;
+}
+
+.navbar-default .container {
+    padding: 0 30px;
+}
+
+.twitter-follow-button {
+    font-size: 0;
+    margin: 11px 0 11px 11px;
+}
+
+.content {
+    padding-top: 30px;
+}
+
 a {
     text-decoration: none;
 }
