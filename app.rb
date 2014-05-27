@@ -28,11 +28,6 @@ def run(opts)
         puts "Websocket connection closed"
         clients.delete ws
       }
-
-      ws.onmessage { |msg|
-        puts "Recieved message: #{msg}"
-        stream.filter msg
-      }
     end
 
     server = opts[:server] || 'thin'

@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8"> 
-  <title>Sinatra Map App</title>
-
-  <link rel="icon" type="image/ico" href="/assets/tweet__.ico"/>
+  <title>Twitter Streaming API Demo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+  <meta name="author" content="Andrew Noonan">
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" media="screen"/>
-
-  <script type="text/javascript" src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
-
+  <link rel="shortcut icon" href="//abs.twimg.com/favicons/favicon.ico" type="image/x-icon">
 </head>
 <body>
 
@@ -20,9 +16,10 @@
     <ul id="list"></ul>
   </div>
 </div>
-
 <div id="map-canvas"/>
 
-</body>
+<script src="//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 <script type="text/javascript" src="/js/tweets.js"></script>
+</body>
 </html>
