@@ -54,9 +54,19 @@ class MapApp < Sinatra::Base
     set :threaded, false
   end
 
-  get '/map' do
-    erb :index
+  get '/' do
+    redirect to('/map')
   end
+
+  get '/map' do
+    erb :map
+  end
+
+  not_found do
+    status 404
+    send_file File.join(settings.public_folder, '404.html')
+  end
+
 end
 
 run app: MapApp.new

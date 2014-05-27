@@ -135,13 +135,5 @@ function initializeMap() {
     }
 }
 
-var appendTweet = function (tweet) {
-    var list = $('#list');
-    list.prepend("<li>" + tweet["text"] + "</li>");
-    if ($("#list li").size() > 30) {
-        $('#list li:last-child').remove();
-    }
-};
-
 // Listen to the load event.
 google.maps.event.addDomListener(window, 'load', initializeMap);
