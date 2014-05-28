@@ -1,26 +1,27 @@
 sample-ruby-app
 =================
 
-Sample Ruby App to consume and display the Twitter public API. Uses Websockets to push to the client.
+Sample Ruby App that consumes and from the [Twitter Streaming API](https://dev.twitter.com/docs/api/streaming),
+displaying the data on a map.
 
 REQUIREMENTS
 ============
 
-To run this sample code, you'll need to install the following libraries:
+To run this app, you will need the following dependencies:
 
 - Ruby >= 2.0.0
-- RVM (optional)
 - Bundler
+- RVM (optional)
 
 
 GETTING STARTED
 ============
 
-To configure and run this example, you'll need to do the following:
+To configure and run this example, do the following:
 
-- Clone this repo
+- Clone this repo or download the code and unzip
 
-- Generate access tokens for your application at https://apps.twitter.com/
+- Go to https://apps.twitter.com/ to generate access tokens for your application. 
 
 - Create a file `config/twitter.yml` and supply your access tokens in this file:
 
@@ -29,13 +30,13 @@ To configure and run this example, you'll need to do the following:
 		access_token: ACCESS_TOKEN  	
 		access_token_secret: ACCESS_TOKEN_SECRET    
 
-- `cd <project_root>`
+- `cd sample-ruby-app`
 
 - `brew link autoconf` (bundle install will tell you to do this if you have not already)
 
 - `bundle install`
 
-- `bundle exec ruby app.rb <ENV>` #ENV defaults to development`
+- `bundle exec ruby app.rb <ENV>` ENV defaults to development`
 
 - Open [http://localhost:8181/map](http://localhost:8181/map)
 
