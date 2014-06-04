@@ -122,7 +122,8 @@ function geolocationSuccess(position) {
 // Callback function when the geolocation is not supported.
 function geolocationError() {
     // Center and show the US
-    map.setCenter(39.159, -100.518);
+    var centerPosition = new google.maps.LatLng(39.159, -100.518);
+    map.setCenter(centerPosition);
     map.setZoom(4);
 }
 

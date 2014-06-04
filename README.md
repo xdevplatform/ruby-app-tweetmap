@@ -19,20 +19,27 @@ GETTING STARTED
 
 To configure and run this example, do the following:
 
+- Go to https://apps.twitter.com/ to generate access tokens for your application, any application built on the twitter API requires authentication tokens. 
+
 - Clone this repo or download the code and unzip
-
-- Go to https://apps.twitter.com/ to generate access tokens for your application. 
-
-- Create a file `config/twitter.yml` and supply your access tokens in this file:
-
-		consumer_key: API_KEY	    
-		consumer_secret: API_SECRET  	
-		access_token: ACCESS_TOKEN  	
-		access_token_secret: ACCESS_TOKEN_SECRET    
 
 - `cd sample-ruby-app`
 
-- `brew link autoconf` (bundle install will tell you to do this if you have not already)
+- Create a file `config/twitter.yml` and supply your access tokens in this file. You could copy `config/example.twitter.yml` and simply fill it in with your access tokens:
+
+ `cp config/example.twitter.yml config/twitter.yml`
+ 
+```
+    development:
+      #API key/secret
+      consumer_key: API_KEY
+      consumer_secret: API_SECRET
+      #Access token/secret
+      access_token: ACCESS_TOKEN
+      access_token_secret: ACCESS_TOKEN_SECRET
+```
+
+- If on OSX and using homebrew, you may need `brew link autoconf` if it has not been linked already
 
 - `bundle install`
 
