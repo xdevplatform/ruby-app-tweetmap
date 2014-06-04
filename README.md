@@ -4,6 +4,11 @@ sample-ruby-app
 Sample Ruby App that consumes and from the [Twitter Streaming API](https://dev.twitter.com/docs/api/streaming),
 displaying the data on a map.
 
+DEMO
+============
+
+Check out a live demo of the app here: http://twitterdevdemo.com/map
+
 REQUIREMENTS
 ============
 
