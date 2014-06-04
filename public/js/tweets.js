@@ -1,4 +1,4 @@
-var ws = new WebSocket('ws://localhost:8080/');
+var ws = new WebSocket('ws://' + location.host + ':8080/');
 var map, markers = [];
 var currentLocation;
 var iconBase = '/assets/';
