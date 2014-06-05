@@ -48,10 +48,18 @@ To configure and run this example, do the following:
 
 - `bundle install`
 
-- `bundle exec ruby app.rb <ENV>` ENV defaults to development`
+- `bundle exec ruby app.rb [OPTIONS]`
 
 - Open [http://localhost:8181/map](http://localhost:8181/map)
 
+### Options
 
 
+```    
+    Available options:
+        -s, --server SERVER              Server to run
+            --host HOST                  Host to run on
+        -p, --port PORT                  Server port
+        -h, --help                       Show this message
+```
 

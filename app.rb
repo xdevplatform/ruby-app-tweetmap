@@ -2,11 +2,40 @@ require 'json'
 require 'eventmachine'
 require 'em-websocket'
 require 'sinatra/base'
+require 'optparse'
 
-require_relative 'config/twitter.rb'
 require_relative 'lib/twitterstream.rb'
 
 def run(opts)
+
+  options = {}
+  OptionParser.new do |opts|
+    opts.banner = "Usage: bundle exec ruby app.rb [options]"
+
+    opts.separator ""
+    opts.separator "Available options:"
+
+    options[:server] = 'thin'
+    opts.on("-s", "--server SERVER", "Server to run") do |v|
+      options[:server] = v
+    end
+
+    options[:host] = '0.0.0.0'
+    opts.on("-h", "--host HOST", "Host to run on") do |v|
+      options[:host] = v
+    end
+
+    options[:port] = '8181'
+    opts.on("-p N", "--port PORT", Integer, "Server port") do |v|
+      options[:port] = v
+    end
+
+    opts.on("-h", "--help", "Show this message") do
+      puts opts
+      exit
+    end
+
+  end.parse!
 
   EM.run do
     clients = []
@@ -30,19 +59,15 @@ def run(opts)
       }
     end
 
-    server = opts[:server] || 'thin'
-    host = opts[:host] || '0.0.0.0'
-    port = opts[:port] || '8181'
-
-    unless ['thin', 'hatetepe', 'goliath'].include? server
-      raise "Need an EM webserver, but #{server} isn't"
+    unless ['thin', 'hatetepe', 'goliath'].include? options[:server]
+      raise "Need an EM webserver, but #{options[:server]} isn't"
     end
 
     Rack::Server.start({
                            app: MapApp,
-                           server: server,
-                           Host: host,
-                           Port: port
+                           server: options[:server],
+                           Host: options[:host],
+                           Port: options[:port]
                        })
 
   end

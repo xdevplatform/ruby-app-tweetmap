@@ -1,19 +1,21 @@
 require 'thread'
 require 'twitter'
+require 'yaml'
 
 class TwitterStream
 
   def initialize
     @callbacks = []
+    @twitter_config = YAML::load_file(File.join(__dir__, '../config/twitter.yml'))
     stream
   end
 
   def tw_client
     Twitter::Streaming::Client.new do |config|
-      config.consumer_key = $TWITTER_CONFIG["consumer_key"]
-      config.consumer_secret = $TWITTER_CONFIG["consumer_secret"]
-      config.access_token = $TWITTER_CONFIG["access_token"]
-      config.access_token_secret = $TWITTER_CONFIG["access_token_secret"]
+      config.consumer_key = @twitter_config["consumer_key"]
+      config.consumer_secret = @twitter_config["consumer_secret"]
+      config.access_token = @twitter_config["access_token"]
+      config.access_token_secret = @twitter_config["access_token_secret"]
     end
   end
 
