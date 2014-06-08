@@ -52,7 +52,7 @@ a:hover {
     text-decoration: none;
 }
 
-#sidebar {
+#sidebar-nav {
     float: left;
     width: 27.5%;
     min-width: 275px;
@@ -63,8 +63,8 @@ a:hover {
 }
 
 #tweets {
-    margin-top: 12px;
-    padding: 12px 24px 0px 12px;
+    margin-top: 5px;
+    padding: 0px 10px 0px 0px;
 }
 
 #tweets h2 {
