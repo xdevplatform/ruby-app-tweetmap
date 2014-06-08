@@ -83,12 +83,15 @@ function handleTweet(message) {
                 infowindow.open(map, marker);
             });
 
-            // Increment counter
+            // Increment counter for TPM
             count = count + 1;
 
             // Append to list
-            var list = $('#list');
-            list.prepend("<li>" + tweet["text"] + "</li>");
+            twt.timeline(tweet, {
+                limit: 3
+            }).prependTo("#list")
+
+            // Only keep last 30 tweets in list
             if ($("#list li").size() > 30) {
                 $('#list li:last-child').remove();
             }
