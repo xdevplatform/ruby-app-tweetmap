@@ -62,28 +62,10 @@ function handleTweet(message) {
                 }
 
                 // Construct Info Window
-                var profileUrl = "http://www.twitter.com/" + tweet["user"]["screen_name"];
-                var statusUrl = profileUrl + "/status/" + tweet["id_str"];
-
-                var contentString = '<div id="tweet" class="tweet">' +
-                    '<a href="' + profileUrl + '" target="_target">' +
-                    '<img class="profile" src="' +
-                    tweet["user"]["profile_image_url"] +
-                    '">' +
-                    '</a>' +
-                    '<div class="body">' +
-                    '<a href="' + profileUrl + '" target="_target">' +
-                    '<div><span class="name">' + tweet["user"]["name"] + '</span>' +
-                    ' <span class="handle">@' + tweet["user"]["screen_name"] + '</span></div>' +
-                    '</a>' +
-                    '<a href="' + statusUrl + '" target="_target" class="text">' +
-                    tweet["text"] +
-                    '</a>' +
-                    '</div>' +
-                    '</div>';
+                var tweetObject = twt.tweet(tweet);
 
                 var infowindow = new google.maps.InfoWindow({
-                    content: contentString
+                    content: tweetObject.html()
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
