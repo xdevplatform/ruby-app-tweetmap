@@ -89,13 +89,11 @@ function handleTweet(message) {
                 count = count + 1;
 
                 // Append to list
-                twt.timeline(tweet, {
-                    limit: 3
-                }).prependTo("#list")
+                twt.timeline(tweet).prependTo("#list");
 
                 // Only keep last 30 tweets in list
-                if ($("#list li").size() > 30) {
-                    $('#list li:last-child').remove();
+                if ($("#list .twt-standard").size() > 30) {
+                    $('#list .twt-standard:last-child').remove();
                 }
             }
         }
