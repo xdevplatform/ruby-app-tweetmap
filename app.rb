@@ -4,9 +4,12 @@ require 'em-websocket'
 require 'sinatra/base'
 require 'optparse'
 
-require_relative 'lib/twitterstream.rb'
+require_relative 'lib/twitterstream'
+require_relative 'lib/configure_logger'
 
 def run(opts)
+
+  $logger.info "Parsing options..."
 
   options = {}
   OptionParser.new do |opts|
@@ -37,6 +40,7 @@ def run(opts)
 
   end.parse!
 
+  $logger.info "Starting websocket server"
   EM.run do
     clients = []
 
@@ -48,14 +52,22 @@ def run(opts)
     }
 
     EM::WebSocket.run(:host => "0.0.0.0", :port => 8080) do |ws|
-      ws.onopen {
-        puts "WebSocket connection open"
+      ws.onopen { |handshake|
+        $logger.info "WebSocket connection open"
+        $logger.info "Headers: #{handshake.origin}" unless handshake.nil?
         clients << ws
+        $logger.info "#{clients.size} clients connected"
       }
 
       ws.onclose {
-        puts "Websocket connection closed"
+        $logger.info "Websocket connection closed"
         clients.delete ws
+      }
+
+      ws.onerror { |error|
+        if error.kind_of?(EM::WebSocket::WebSocketError)
+          $logger.error "Error occured on websocket " + error
+        end
       }
     end
 
@@ -93,5 +105,7 @@ class MapApp < Sinatra::Base
   end
 
 end
+
+$logger.info "Starting application"
 
 run app: MapApp.new

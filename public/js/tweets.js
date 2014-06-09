@@ -69,7 +69,6 @@ function handleTweet(message) {
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    $(".tweet").parent().parent().parent().fadeOut();
                     infowindow.open(map, marker);
                 });
 

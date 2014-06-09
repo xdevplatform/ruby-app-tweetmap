@@ -7,7 +7,9 @@ class TwitterStream
 
   def initialize
     @callbacks = []
-    @twitter_config = YAML::load_file(File.join(__dir__, '../config/twitter.yml'))
+    creds = File.join(__dir__, '../config/twitter.yml')
+    $logger.info "Loading Twitter credentials from #{creds}"
+    @twitter_config = YAML::load_file(creds)
 
     Obscenity.config do |config|
       config.blacklist = "./badwords.yml"
@@ -34,7 +36,7 @@ class TwitterStream
       retry_count = 0
       begin
         filter_bounds = "-180,-90,180,90"
-        puts "Making connection to Twitter  streaming API..."
+        $logger.info "Making connection to Twitter  streaming API..."
         tw_client.filter(locations: filter_bounds) do |object|
           if object.is_a?(Twitter::Tweet)
             tweet = object.to_h
@@ -47,9 +49,9 @@ class TwitterStream
         end
       rescue => e
         retry_count += 1
-        puts "Error connecting to stream: #{e.message}"
+        $logger.error "Error connecting to stream: #{e.message}"
         retry_delay = retry_count * 5
-        puts "Reconnecting in #{retry_delay} seconds\n"
+        $logger.error "Reconnecting in #{retry_delay} seconds\n"
         sleep retry_delay
         retry
       end
