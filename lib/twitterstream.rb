@@ -1,12 +1,18 @@
 require 'thread'
 require 'twitter'
 require 'yaml'
+require 'obscenity'
 
 class TwitterStream
 
   def initialize
     @callbacks = []
     @twitter_config = YAML::load_file(File.join(__dir__, '../config/twitter.yml'))
+
+    Obscenity.config do |config|
+      config.blacklist = "./badwords.yml"
+    end
+
     stream
   end
 
@@ -31,7 +37,11 @@ class TwitterStream
         puts "Making connection to Twitter  streaming API..."
         tw_client.filter(locations: filter_bounds) do |object|
           if object.is_a?(Twitter::Tweet)
-            @callbacks.each { |c| c.call(object.to_h) }
+            tweet = object.to_h
+            if Obscenity.profane? tweet[:text] then
+              tweet["obscene"] = true
+            end
+            @callbacks.each { |c| c.call(tweet) }
             retry_count = 0
           end
         end

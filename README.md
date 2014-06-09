@@ -2,14 +2,18 @@ sample-ruby-app
 =================
 
 Sample Ruby App that consumes and from the [Twitter Streaming API](https://dev.twitter.com/docs/api/streaming),
-displaying the data on a map.
+displaying the data on a map and streaming the tweets in a pauseable timeline.
 
-DEMO
+Demo
 ============
 
 Check out a live demo of the app here: http://twitterdevdemo.com/map
 
-REQUIREMENTS
+### Censor Stream Query Param
+
+Append `?censor=true` to attempt filtering out obscene tweets from the stream (no guarantees!).
+
+Requirements
 ============
 
 To run this app, you will need the following dependencies:
@@ -19,7 +23,7 @@ To run this app, you will need the following dependencies:
 - RVM (optional)
 
 
-GETTING STARTED
+Getting Started
 ============
 
 To configure and run this example, do the following:

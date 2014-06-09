@@ -5,6 +5,7 @@ var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png';
 var count = 0;
 var play = true;
+var censor = window.location.search.indexOf("censor=true") > -1 ? true : false;
 
 // Socket open event
 ws.onopen = function () {
@@ -30,6 +31,11 @@ ws.onclose = function () {
 function handleTweet(message) {
     if (play) {
         var tweet = JSON.parse(message.data);
+
+        if(censor && tweet.obscene){
+            return;
+        }
+
         var geo = tweet.coordinates;
 
         // Check if the geo type is a Point (it can also be a Polygon).
@@ -146,7 +152,7 @@ function initializeMap() {
     }
 }
 
-$("#btn").click(function() {
+$("#btn").click(function () {
     $("#pause").toggle();
     $("#play").toggle();
     play = play ? false : true;
