@@ -36,22 +36,24 @@ class TwitterStream
       retry_count = 0
       begin
         filter_bounds = "-180,-90,180,90"
-        $logger.info "Making connection to Twitter  streaming API..."
+        $logger.info "Making connection to Twitter streaming API..."
         tw_client.filter(locations: filter_bounds) do |object|
-          if object.is_a?(Twitter::Tweet)
+          if object.is_a? Twitter::Tweet
             tweet = object.to_h
             if Obscenity.profane? tweet[:text] then
               tweet["obscene"] = true
             end
             @callbacks.each { |c| c.call(tweet) }
             retry_count = 0
+          elsif object.is_a? Twitter::Streaming::StallWarning
+            $logger.warn "Falling behind!"
           end
         end
       rescue => e
         retry_count += 1
-        $logger.error "Error connecting to stream: #{e.message}"
+        $logger.error "Stream connection error: #{e.message}"
         retry_delay = retry_count * 5
-        $logger.error "Reconnecting in #{retry_delay} seconds\n"
+        $logger.error "Reconnecting in #{retry_delay} seconds"
         sleep retry_delay
         retry
       end

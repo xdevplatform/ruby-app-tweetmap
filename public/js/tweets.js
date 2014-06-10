@@ -5,7 +5,8 @@ var iconBase = '/assets/';
 var iconTweet = iconBase + 'tweet__.png';
 var count = 0;
 var play = true;
-var censor = window.location.search.indexOf("censor=true") > -1 ? true : false;
+var censor = window.location.search.indexOf("censor=true") > -1;
+var infoWindow = new google.maps.InfoWindow();
 
 // Socket open event
 ws.onopen = function () {
@@ -32,7 +33,7 @@ function handleTweet(message) {
     if (play) {
         var tweet = JSON.parse(message.data);
 
-        if(censor && tweet.obscene){
+        if (censor && tweet.obscene) {
             return;
         }
 
@@ -61,15 +62,11 @@ function handleTweet(message) {
                     markers.shift();
                 }
 
-                // Construct Info Window
-                var tweetObject = twt.tweet(tweet);
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: tweetObject.html()
-                });
+                marker.set('tweet', tweet);
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    infowindow.open(map, marker);
+                    infoWindow.setContent(twt.tweet(marker.get('tweet')).html());
+                    infoWindow.open(map, marker);
                 });
 
                 // Increment counter for TPM
@@ -86,13 +83,6 @@ function handleTweet(message) {
         }
     }
 }
-
-// Calculate a TPM every 4s
-setInterval(function () {
-    var tpm = count * 15 + " TPM";
-    $("#tpm").html(tpm);
-    count = 0;
-}, 4000);
 
 // Callback function when the geolocation is retrieved.
 function geolocationSuccess(position) {
@@ -123,6 +113,7 @@ function initializeMap() {
     var mapOptions = {
         zoom: 7
     };
+
     map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
     // Request the user geolocation.
@@ -131,6 +122,10 @@ function initializeMap() {
     } else {
         geolocationError();
     }
+
+    google.maps.event.addListener(map, "click", function () {
+        infoWindow.close();
+    });
 }
 
 $("#btn").click(function () {
@@ -138,6 +133,13 @@ $("#btn").click(function () {
     $("#play").toggle();
     play = play ? false : true;
 });
+
+// Calculate a TPM every 4s
+setInterval(function () {
+    var tpm = count * 15 + " TPM";
+    $("#tpm").html(tpm);
+    count = 0;
+}, 4000);
 
 // Listen to the load event.
 google.maps.event.addDomListener(window, 'load', initializeMap);
