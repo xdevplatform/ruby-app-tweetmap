@@ -8,7 +8,7 @@ class TwitterStream
   def initialize
     @callbacks = []
     creds = File.join(__dir__, '../config/twitter.yml')
-    $logger.info "Loading Twitter credentials from #{creds}"
+    $logger.info "Loading Twitter credentials from #{File.absolute_path(creds)}"
     @twitter_config = YAML::load_file(creds)
 
     Obscenity.config do |config|

@@ -54,7 +54,6 @@ def run(opts)
     EM::WebSocket.run(:host => "0.0.0.0", :port => 8080) do |ws|
       ws.onopen { |handshake|
         $logger.info "WebSocket connection open"
-        $logger.info "Headers: #{handshake.origin}" unless handshake.nil?
         clients << ws
         $logger.info "#{clients.size} clients connected"
       }
@@ -96,6 +95,7 @@ class MapApp < Sinatra::Base
   end
 
   get '/map' do
+    $logger.info "Serving incoming request from #{@request.ip}"
     erb :map
   end
 
