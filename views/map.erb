@@ -5,10 +5,16 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
   <meta name="author" content="Andrew Noonan">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@twitterdev">
+  <meta name="twitter:title" content="Twitter Streaming Map Demo">
+  <meta name="twitter:description" content="A powerful visual representation of the activity on Twitter around you, right now.">
+  <meta name="twitter:creator" content="@noonisms">
+  <meta name="twitter:image:src" content="http://twitterdevdemo.com/assets/screenShot.png">
+  <meta name="twitter:domain" content="twitterdevdemo.com">
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="/stylesheets/application.css" media="screen"/>
   <link rel="shortcut icon" href="//abs.twimg.com/favicons/favicon.ico" type="image/x-icon">
-
   <link rel="stylesheet" href="/twt/twt.min.css" type="text/css">
   <script src="/twt/twt.all.min.js"></script>
 </head>
@@ -25,6 +31,7 @@
     <div class="container">
       <div class="navbar-header">
         <a class="navbar-brand" href="#">Twitter</a>
+
         <h1 class="navbar-text">Twitter Streaming API Map Demo</h1>
       </div>
       <ul class="nav navbar-nav navbar-right">
@@ -40,6 +47,7 @@
 <div id="sidebar-nav">
   <div align="center">
     <h3>Happening Now <span id="tpm" class="badge">0 TPM</span></h3>
+
     <div id="btn">
       <button id="pause" type="button" class="btn btn-default btn-lg" data-toggle="button">
         <span class="glyphicon glyphicon-pause"></span>Pause Stream
