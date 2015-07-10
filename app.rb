@@ -3,6 +3,7 @@ require 'eventmachine'
 require 'em-websocket'
 require 'sinatra/base'
 require 'optparse'
+require 'tilt/erb'
 
 require_relative 'lib/twitterstream'
 require_relative 'lib/configure_logger'
